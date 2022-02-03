@@ -1,18 +1,38 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Create schema for item
-const Item = new Schema({
+const ItemSchema = new Schema({
   name: {
     type: String,
-    required: [true, 'The name text field is required'],
+    required: true,
   },
   wowheadId: {
-    required: [true, 'The wowheadId text field is required']
-  }
+    type: String,
+    required: true,
+  },
+  modifiers: {
+    type: String,
+  },
+  class: {
+    type: String,
+    required: true,
+  },
+  spec: {
+    type: String,
+    required: true,
+  },
+  icon: {
+    type: Schema.Types.ObjectId, ref:"icon",
+    required: true,
+  },
+  rarity: {
+    type: String,
+    required: true,
+  },
 });
 
 // Create model for todo
-const Item = mongoose.model('item', ItemSchema);
+const Item = mongoose.model("items", ItemSchema);
 
 module.exports = Item;
