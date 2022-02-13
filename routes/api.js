@@ -10,21 +10,24 @@ router.get("/classes", (req, res, next) => {
     .catch(next);
 });
 router.get("/specs/:class", (req, res, next) => {
-  Class.findOne({name: req.params.class})
+  Class.findOne({ name: req.params.class })
     .then((data) => res.json(data))
     .catch(next);
 });
 
 router.get("/items/:class/:spec", (req, res, next) => {
   Item.find({ class: req.params.class, spec: req.params.spec })
-    .populate("icon")
+    .populate("enchantIcon")
+    .populate("gems")
     .then((data) => res.json(data))
     .catch(next);
 });
 
-router.post("/todos", (req, res, next) => {
+router.post("/items", (req, res, next) => {
   if (req.body.action) {
-    Todo.create(req.body)
+    Item.create(req.body)
+      .populate("enchantIcon")
+      .populate("gems")
       .then((data) => res.json(data))
       .catch(next);
   } else {

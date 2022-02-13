@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const enchantGemSchema = require("./enchant_gem").schema
 
 // Create schema for item
 const ItemSchema = new Schema({
@@ -11,8 +12,11 @@ const ItemSchema = new Schema({
     type: String,
     required: true,
   },
-  modifiers: {
+  enchantment: {
     type: String,
+  },
+  setPieces: {
+    type: Array,
   },
   class: {
     type: String,
@@ -23,12 +27,18 @@ const ItemSchema = new Schema({
     required: true,
   },
   icon: {
-    type: Schema.Types.ObjectId, ref:"icon",
+    type: Buffer,
     required: true,
   },
   rarity: {
     type: String,
     required: true,
+  },
+  enchant: {
+    type: enchantGemSchema,
+  },
+  gems: {
+    type: [enchantGemSchema],
   },
 });
 

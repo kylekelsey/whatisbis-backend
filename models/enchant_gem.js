@@ -2,21 +2,25 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Create schema for item
-const IconSchema = new Schema({
+const EnchantGemSchema = new Schema({
   name: {
     type: String,
     required: true,
   },
-  binary: {
+  icon: {
     type: Buffer,
     required: true,
   },
   wowheadId: {
-      type: String
-  }
+    type: String,
+    required: true,
+  },
+  enchantSpell: {
+    type: String,
+  },
 });
 
 // Create model for todo
-const Icon = mongoose.model("icon", IconSchema);
+const EnchantGem = mongoose.model("enchant_gem", EnchantGemSchema);
 
-module.exports = Icon;
+module.exports = EnchantGem;
