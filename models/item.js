@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const enchantGemSchema = require("./enchant_gem").schema
+const enchantGemSchema = require("./enchant_gem").schema;
 
 // Create schema for item
 const ItemSchema = new Schema({
@@ -11,12 +11,6 @@ const ItemSchema = new Schema({
   wowheadId: {
     type: String,
     required: true,
-  },
-  enchantment: {
-    type: String,
-  },
-  setPieces: {
-    type: Array,
   },
   class: {
     type: String,
@@ -33,6 +27,9 @@ const ItemSchema = new Schema({
   rarity: {
     type: String,
     required: true,
+  },
+  setPieces: {
+    type: Array,
   },
   enchant: {
     type: enchantGemSchema,

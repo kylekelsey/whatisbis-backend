@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Item = require("../models/item");
 const Class = require("../models/class");
-const Icon = require("../models/icon");
 
 router.get("/classes", (req, res, next) => {
   Class.find({})
@@ -17,17 +16,13 @@ router.get("/specs/:class", (req, res, next) => {
 
 router.get("/items/:class/:spec", (req, res, next) => {
   Item.find({ class: req.params.class, spec: req.params.spec })
-    .populate("enchantIcon")
-    .populate("gems")
     .then((data) => res.json(data))
     .catch(next);
 });
 
 router.post("/items", (req, res, next) => {
-  if (req.body.action) {
+  if (req.body) {
     Item.create(req.body)
-      .populate("enchantIcon")
-      .populate("gems")
       .then((data) => res.json(data))
       .catch(next);
   } else {
@@ -37,10 +32,10 @@ router.post("/items", (req, res, next) => {
   }
 });
 
-router.delete("/todos/:id", (req, res, next) => {
-  Todo.findOneAndDelete({ _id: req.params.id })
-    .then((data) => res.json(data))
-    .catch(next);
-});
+// router.delete("/todos/:id", (req, res, next) => {
+//   Item.findOneAndDelete({ _id: req.params.id })
+//     .then((data) => res.json(data))
+//     .catch(next);
+// });
 
 module.exports = router;
